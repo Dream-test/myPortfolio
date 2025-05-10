@@ -2,15 +2,15 @@
 
    <https://allegro.pl/>
 
-1. Started DevTools, using Chrome browser, Version 126.0.6478.182 (Official build), (64 bit), went to the Network tab:
+2. Started DevTools, using Chrome browser, Version 126.0.6478.182 (Official build), (64 bit), went to the Network tab:
 
    ![](Aspose.Words.ff38bf87-a45d-4ffc-965e-468ba606daeb.001.png)
 
-1. **Interception of network traffic:**
+3. **Interception of network traffic:**
 
    Clicking on the offer “Telewizory z Gwarancją najniższej ceny” leads to the formation of a browser request to the resource, the server responds with HTML code of a new page and additional requests for downloading images, CSS, scripts, sending statistics are sequentially executed. No requests rejected, not processed and containing error status codes were found
 
-1. **Analyzing requests and responses:**
+4. **Analyzing requests and responses:**
 
    Requesting a new HTML page
 
@@ -26,7 +26,7 @@ Server response - new HTML page, its active and passive content, stylesheets, st
 ![](Aspose.Words.ff38bf87-a45d-4ffc-965e-468ba606daeb.002.png)
 
 
-1. **Checking errors in network requests:**
+5. **Checking errors in network requests:**
 
    “Console” tab - no records of errors in sending requests or failures in receiving responses were found.
 
@@ -56,7 +56,7 @@ On the “Console” tab - records about errors of processing the specified requ
 
 
 
-1. **Testing asynchronous requests:**
+6. **Testing asynchronous requests:**
 
    After processing the resource request: https://allegro.pl/kategoria/tv-i-video-telewizory-257732?offerTypeBuyNow=1&stan=nowe&vat\_invoice=1&BEST\_PRICE\_GUARANTEE=1 and loading the HTML document with the content of the corresponding page, an asynchronous:
 
@@ -93,7 +93,7 @@ On the “Console” tab - records about errors of processing the specified requ
 
 Asynchronous requests are transmitted and handled correctly by the server.
 
-1. **Editing requests:**
+7. **Editing requests:**
 
    I check the server processing of the edited request on the basis of xhr request “verification”, which is created by the browser as a result of filling in the phone number in the user authorization form using this number and pressing the send button:
 
@@ -131,7 +131,7 @@ I repeat the above steps, replacing the phone number with +48000000000:
 
 The server processes the request and sends a response in the body of which does not contain a message about an error in the number, which will cause further interaction attempt to send SMS with the code for authorization. I consider the processing of the request by the server to be erroneous - register the bug.
 
-1. **Bug Report**
+8. **Bug Report**
 
 <table><tr><th colspan="3" valign="bottom"><b>Bug report</b></th></tr>
 <tr><td colspan="1" rowspan="6"><b>1.1</b></td><td colspan="1"><b>Bug</b></td><td colspan="1">Server does not process zero phone number in the authorization form as invalid</td></tr>
@@ -142,21 +142,21 @@ The server processes the request and sends a response in the body of which does 
 <tr><td colspan="1"><b>Environment</b></td><td colspan="1"><p>Windows 10 Pro 21H2</p><p>Chrome Version 126.0.6478.182 (Official build), (64 bit)</p></td></tr>
 </table>
 
-1. **Test report.**
+9. **Test report.**
 
 1. **Purpose of the document:** 
 
    This document explains the actions performed within the framework of testing the network interaction with https://allegro.pl server, the results obtained, their statistics and contains recommendations for improvement.
 
-1. **Site overview:**
+2. **Site overview:**
 
    The website https://allegro.pl is an e-commerce platform that supports both auctions and direct sales. It connects buyers with individual sellers and businesses. Features: - user accounts: registered users can track their purchases, save favorite items and receive notifications of deals and discounts; - product and category search; - shopping cart and checkout; - various payment methods, including bank transfers, credit/debit cards and e-wallets; - shipping and self-delivery.
 
-1. **Testing area:**
+3. **Testing area:**
 
    Processing by the web server of the site of browser requests to the resources of the site in accordance with use cases within the smoke tasting.
 
-1. **Metrics:**
+4. **Metrics:**
 
    |**Test-cases planned**|**Test-cases executed**|**TCs Pass**|**TCs Failed**|
    | :-: | :-: | :-: | :-: |
@@ -165,7 +165,7 @@ The server processes the request and sends a response in the body of which does 
 
    ![](Aspose.Words.ff38bf87-a45d-4ffc-965e-468ba606daeb.005.png)
 
-1. **Test cases passed in the course of testing:**
+5. **Test cases passed in the course of testing:**
 
 |**№ Test Case**|**Name of check**|**Result**|**Comments and recommendations**|
 | :-: | :-: | :-: | :-: |
@@ -180,11 +180,11 @@ The server processes the request and sends a response in the body of which does 
 |1\.9|A request containing data for user authorization by phone number for a number consisting of a country code and all “0” is processed correctly by the server, an error message is sent to the frontend|Fail|The request is processed by the server as containing valid data. The response does not contain information about an error in the number. SMS sending to the “zero” number is initialized|
 |1\.10|Queries when entering each character in the search field of the site are processed correctly by the server, the response contains data with recommendations for the user|Pass||
 
-1. **Team composition and scope of work:**
+6. **Team composition and scope of work:**
 
 Testing was conducted by the team - 1 Junior QA, 10 test cases were conducted, testing time - 1 hour.
 
-1. **Conclusions from the test results:**
+7. **Conclusions from the test results:**
 
 During the test period 10 test cases were conducted, 1 defect was detected. The list of defects is given in Appendix 1. It is recommended to enter the mask of “zero” phone number (country code + all zeros in the number) as non-valid with sending the corresponding information to the frontend and blocking the initialization of SMS sending.
 
